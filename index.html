@@ -5,6 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoList</title>
+    <!-- GOOGLE FONT  -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <!-- FONT AWESOME -->
     <link
       rel="stylesheet"
@@ -31,7 +39,7 @@
   </head>
 
   <body>
-    <div class="container-xl" id="app">
+    <div class="container-md" id="app">
       <div class="row h-100">
         <div class="col-4 p-0" id="side">
           <div id="profileBar" class="active">
@@ -43,10 +51,20 @@
               <i class="bi bi-three-dots-vertical"></i>
             </div>
           </div>
-          <div id="notificationBar"></div>
+          <div id="notificationBar">
+            <div class="circleIcon">
+              <i class="bi bi-bell-slash-fill"></i>
+              <h4>Ricevi notifiche di nuovi messaggi</h4>
+              <span>Attiva notifiche desktop</span>
+            </div>
+          </div>
           <div id="searchBar"></div>
           <div id="chatsContainer" class="overflow-y-auto">
-            <div v-for="user in contacts" class="userChat">
+            <div
+              v-for="(user, index) in contacts"
+              class="userChat"
+              @click="selectContact(index)"
+            >
               <img :src="user.avatar" alt="ProfilePic" class="profilePicture" />
               <h4>{{ user.name }}</h4>
               <span class="lastOnline"></span>
@@ -55,9 +73,38 @@
           </div>
         </div>
         <div class="col-8 p-0" id="mainSection">
-          <div id="userBarChat" class="active"></div>
-          <div id="activeChat"></div>
-          <div id="typeBarChat" class="active"></div>
+          <div id="userBarChat" class="active">
+            <img
+              :src="contacts[selectedContact].avatar"
+              alt="My PP"
+              class="profilePicture"
+            />
+            <h4>{{contacts[selectedContact].name}}</h4>
+            <div class="icons">
+              <i class="bi bi-search"></i>
+              <i class="bi bi-paperclip"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </div>
+          </div>
+          <div id="activeChat" class="d-flex flex-column">
+            <div
+              v-for="item in contacts[selectedContact].messages"
+              :class="item.status"
+              class="col-5"
+            >
+              <span>{{ item.message }}</span>
+            </div>
+          </div>
+          <div id="typeBarChat" class="active d-flex p-3">
+            <div class="icons"><i class="bi bi-emoji-smile"></i></div>
+            <input
+              type="text"
+              name="newChatMessage"
+              id="newChatMessage"
+              class="form-control"
+            />
+            <div class="icons"><i class="bi bi-mic-fill"></i></div>
+          </div>
         </div>
       </div>
     </div>

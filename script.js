@@ -166,11 +166,25 @@ const app = createApp({
           ],
         },
       ],
+
+      selectedContact: 0,
+
+      newChatMessage: {
+        date: "",
+        message: "",
+        status: "sent",
+      },
     };
   },
   computed: {
-    getLastMessage() {
-      return this.messages[this.messages.length - 1].a;
+    // getLastMessage() {
+    //   return this.messages[this.messages.length - 1].a;
+    // },
+  },
+
+  methods: {
+    selectContact(index) {
+      this.selectedContact = index;
     },
   },
 });
