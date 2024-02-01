@@ -33,13 +33,31 @@
   <body>
     <div class="container-xl" id="app">
       <div class="row h-100">
-        <div class="col-4" id="side">
-          <div></div>
+        <div class="col-4 p-0" id="side">
+          <div id="profileBar" class="active">
+            <img src="./img/avatar_io.jpg" alt="My PP" class="profilePicture" />
+            <h4>Sofia</h4>
+            <div class="icons">
+              <i class="bi bi-circle"></i>
+              <i class="bi bi-chat-left-fill"></i>
+              <i class="bi bi-three-dots-vertical"></i>
+            </div>
+          </div>
+          <div id="notificationBar"></div>
+          <div id="searchBar"></div>
+          <div id="chatsContainer" class="overflow-y-auto">
+            <div v-for="user in contacts" class="userChat">
+              <img :src="user.avatar" alt="ProfilePic" class="profilePicture" />
+              <h4>{{ user.name }}</h4>
+              <span class="lastOnline"></span>
+              <span class="lastMessage"></span>
+            </div>
+          </div>
         </div>
-        <div class="col-8" id="mainChat">
-          <div id="userBarChat"></div>
+        <div class="col-8 p-0" id="mainSection">
+          <div id="userBarChat" class="active"></div>
           <div id="activeChat"></div>
-          <div id="typeBarChat"></div>
+          <div id="typeBarChat" class="active"></div>
         </div>
       </div>
     </div>

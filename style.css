@@ -1,5 +1,6 @@
 :root {
-  --bannersize: 100px;
+  --bannersize: 80px;
+  --bannerbig: 100px;
 }
 
 body {
@@ -7,10 +8,13 @@ body {
   background: linear-gradient(
     to bottom,
     #009688 0%,
-    #009688 15%,
-    white 15%,
-    white 100%
+    #009688 20%,
+    #d7d7d1 20%,
+    #d7d7d1 100%
   );
+}
+.active {
+  background-color: #e6e6e6;
 }
 
 #app {
@@ -20,11 +24,61 @@ body {
 }
 
 #side,
-#mainChat {
+#mainSection {
   height: 100%;
   border: 2px solid red;
 }
 
+#userBarChat,
+#profileBar,
+#typeBarChat {
+  height: var(--bannersize);
+  border: 2px solid red;
+}
+
+#profileBar {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+#profileBar i {
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+#notificationBar {
+  height: var(--bannerbig);
+  border: 2px solid red;
+  background-color: #8cd7fa;
+}
+
+#searchBar {
+  height: 50px;
+  border: 2px solid red;
+  background-color: #fafafa;
+}
+
 #activeChat {
-  background-image: "./img/mine.jpg";
+  background-image: url("./img/mine.jpg");
+  height: calc(90vh - 160px);
+}
+
+/* CHAT LATERALI */
+
+.userChat {
+  border: 2px solid red;
+  display: flex;
+  padding: 10px;
+}
+
+.profilePicture {
+  width: 50px;
+  height: 50px;
+  display: block;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.userChat {
 }
