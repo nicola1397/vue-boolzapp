@@ -1,0 +1,30 @@
+:root {
+  --bannersize: 100px;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #009688 0%,
+    #009688 15%,
+    white 15%,
+    white 100%
+  );
+}
+
+#app {
+  height: 90vh;
+  margin-top: 5vh;
+  background-color: white;
+}
+
+#side,
+#mainChat {
+  height: 100%;
+  border: 2px solid red;
+}
+
+#activeChat {
+  background-image: "./img/mine.jpg";
+}
