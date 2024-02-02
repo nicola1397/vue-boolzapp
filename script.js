@@ -167,6 +167,7 @@ const app = createApp({
         },
       ],
 
+      messageID: "",
       selectedContact: 0,
       searchContact: "",
 
@@ -188,6 +189,11 @@ const app = createApp({
   methods: {
     selectContact(index) {
       this.selectedContact = index;
+    },
+
+    removeMessage(index) {
+      // console.log(messageIndex);
+      this.contacts[this.selectedContact].messages.splice(index, 1);
     },
     splitDate(date) {
       const splittedDate = date.split(" ");

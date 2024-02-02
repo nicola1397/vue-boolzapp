@@ -140,12 +140,28 @@
           <!-- CURRENT CHAT TEXT -->
           <div id="activeChat" class="d-flex flex-column">
             <div
-              v-for="item in contacts[selectedContact].messages"
+              v-for="(item, index) in contacts[selectedContact].messages"
               :class="item.status"
-              class="col-5"
+              class="col-5 messageBody"
             >
               <span>{{ item.message }}</span>
               <span class="timeStamp">{{splitDate(item.date)}}</span>
+
+              <li class="dropdown">
+                <button role="button" data-bs-toggle="dropdown">
+                  <i class="fa-solid fa-chevron-down fa-sm"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="dropdown-item">Info Messaggio</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" @click="removeMessage(index)">
+                      Elimina
+                    </button>
+                  </li>
+                </ul>
+              </li>
             </div>
           </div>
           <!-- WRITE TEXT MESSAGE -->
