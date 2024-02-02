@@ -3,6 +3,14 @@
   --bannerbig: 100px;
 }
 
+li {
+  list-style: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
 body {
   height: 100vh;
   font-family: "Lato", sans-serif;
@@ -14,7 +22,6 @@ body {
     #d7d7d1 100%
   );
   overflow: hidden;
-  list-style: none;
 }
 .active {
   background-color: #e6e6e6;
@@ -76,20 +83,41 @@ body {
   padding: 10px 40px;
 }
 
+.messageBody {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown {
+  position: absolute;
+  right: 10px;
+  background-color: inherit;
+}
+
 #activeChat button {
   border: none;
   background-color: transparent;
   display: none;
 }
+
 #activeChat .messageBody:hover button {
   display: block;
 }
 
 /* CHAT LATERALI */
+#chatsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+}
 
 .userChat {
   display: flex;
   padding: 10px;
+  height: var(--bannersize);
+  align-items: center;
 }
 
 .profilePicture {

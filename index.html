@@ -91,25 +91,31 @@
             </div>
           </div>
           <!-- CHATS -->
-          <div id="chatsContainer" class="overflow-y-scroll">
+          <div id="chatsContainer" class="overflow-y-auto">
             <ul>
               <li
                 v-for="(user, index) in findContact"
-                class="userChat"
                 @click="selectContact(index)"
               >
-                <div class="d-flex justify-content-between">
-                  <img
-                    :src="user.avatar"
-                    alt="ProfilePic"
-                    class="profilePicture"
-                  />
-
+                <div
+                  class="d-flex justify-content-between p-2 flex-grow-0 userChat"
+                  :class=" index == selectedContact ? `active` : ``"
+                >
                   <div>
+                    <div>
+                      <img
+                        :src="user.avatar"
+                        alt="ProfilePic"
+                        class="profilePicture"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
                     <h4>{{ user.name }}</h4>
-                    <span class="lastMessage"
-                      >{{user.messages[user.messages.length-1].message}}</span
-                    >
+                    <span class="lastMessage">
+                      {{user.messages[user.messages.length-1].message.slice(0,
+                      25)}}
+                    </span>
                   </div>
                   <span class="lastOnline timeStamp"
                     >{{splitDate(user.messages[user.messages.length-1].date)}}</span
@@ -144,7 +150,10 @@
               :class="item.status"
               class="col-5 messageBody"
             >
-              <span>{{ item.message }}</span>
+              <div>
+                <span>{{ item.message }}</span>
+              </div>
+              <div></div>
               <span class="timeStamp">{{splitDate(item.date)}}</span>
 
               <li class="dropdown">
