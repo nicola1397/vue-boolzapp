@@ -170,14 +170,10 @@ const app = createApp({
       messageID: "",
       selectedContact: 0,
       searchContact: "",
-
       newChatMessage: "",
     };
   },
   computed: {
-    getLastMessage() {
-      return this.messages[this.messages.length - 1];
-    },
     findContact() {
       const searchName = this.searchContact.toLowerCase();
       return this.contacts.filter((contact) => {
@@ -187,18 +183,20 @@ const app = createApp({
   },
 
   methods: {
+    lastOnline() {
+      const dateStr =
+        this.contacts[this.selectedContact].messages[
+          this.contacts[this.selectedContact].messages.length - 1
+        ].date;
+      return dateStr;
+    },
     selectContact(index) {
       this.selectedContact = index;
     },
 
     removeMessage(index) {
-      // console.log(messageIndex);
+      console.log(messageIndex);
       this.contacts[this.selectedContact].messages.splice(index, 1);
-    },
-    splitDate(date) {
-      const splittedDate = date.split(" ");
-      [messageDate, hour] = splittedDate;
-      return hour;
     },
 
     sendNewMessage() {

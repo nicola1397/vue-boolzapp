@@ -91,38 +91,40 @@
             </div>
           </div>
           <!-- CHATS -->
-          <div id="chatsContainer" class="overflow-y-auto">
-            <ul>
-              <li
-                v-for="(user, index) in findContact"
-                @click="selectContact(index)"
-              >
-                <div
-                  class="d-flex justify-content-between p-2 flex-grow-0 userChat"
-                  :class=" index == selectedContact ? `active` : ``"
+          <div id="chatsContainer" class="chatsList">
+            <div class="listContainer">
+              <ul>
+                <li
+                  v-for="(user, index) in findContact"
+                  @click="selectContact(index)"
                 >
-                  <div>
-                    <div>
-                      <img
-                        :src="user.avatar"
-                        alt="ProfilePic"
-                        class="profilePicture"
-                      />
-                    </div>
-                  </div>
-                  <div class="flex-grow-1">
-                    <h4>{{ user.name }}</h4>
-                    <span class="lastMessage">
-                      {{user.messages[user.messages.length-1].message.slice(0,
-                      25)}}
-                    </span>
-                  </div>
-                  <span class="lastOnline timeStamp"
-                    >{{splitDate(user.messages[user.messages.length-1].date)}}</span
+                  <div
+                    class="d-flex justify-content-between p-2 flex-grow-0 userChat"
+                    :class=" index == selectedContact ? `active` : ``"
                   >
-                </div>
-              </li>
-            </ul>
+                    <div>
+                      <div>
+                        <img
+                          :src="user.avatar"
+                          alt="ProfilePic"
+                          class="profilePicture"
+                        />
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                      <h4>{{ user.name }}</h4>
+                      <span class="lastMessage">
+                        {{user.messages[user.messages.length-1].message.slice(0,
+                        25)}}
+                      </span>
+                    </div>
+                    <span class="lastOnline timeStamp"
+                      >{{user.messages[user.messages.length-1].date.substring(11,16)}}</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <!-- RIGHT SIDE -->
@@ -135,7 +137,13 @@
                 alt="User ProPic"
                 class="profilePicture d-inline-block"
               />
+            </div>
+            <div class="d-flex flex-column flex-grow-1">
               <h4 class="d-inline-block">{{contacts[selectedContact].name}}</h4>
+              <span class="timeStamp align-self-start"
+                >Ultima volta online il {{lastOnline().substring(0,10)}} alle
+                {{lastOnline().substring(11,16)}}
+              </span>
             </div>
             <div class="icons">
               <i class="bi bi-search"></i>
@@ -154,7 +162,7 @@
                 <span>{{ item.message }}</span>
               </div>
               <div></div>
-              <span class="timeStamp">{{splitDate(item.date)}}</span>
+              <span class="timeStamp">{{item.date.substring(11,16)}}</span>
 
               <li class="dropdown">
                 <button role="button" data-bs-toggle="dropdown">
