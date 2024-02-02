@@ -39,53 +39,105 @@
   </head>
 
   <body>
+    <!-- APP CONTAINER -->
     <div class="container-md" id="app">
       <div class="row h-100">
+        <!-- LEFT SIDE -->
         <div class="col-4 p-0" id="side">
+          <!-- PROFILE -->
           <div id="profileBar" class="active">
-            <img src="./img/avatar_io.jpg" alt="My PP" class="profilePicture" />
-            <h4>Sofia</h4>
+            <div>
+              <img
+                src="./img/avatar_io.jpg"
+                alt="My PP"
+                class="profilePicture d-inline-block"
+              />
+              <h4 class="d-inline-block">Sofia</h4>
+            </div>
             <div class="icons">
               <i class="bi bi-circle"></i>
               <i class="bi bi-chat-left-fill"></i>
-              <i class="bi bi-three-dots-vertical"></i>
+              <i class="bi bi-three-dots-vertical mx-0"></i>
             </div>
           </div>
-          <div id="notificationBar">
-            <div class="circleIcon">
+          <!-- NOTIFICATION ALERT -->
+          <div id="notificationBar" class="d-flex align-items-center">
+            <div class="circleIcon flex-shrink-0">
               <i class="bi bi-bell-slash-fill"></i>
-              <h4>Ricevi notifiche di nuovi messaggi</h4>
-              <span>Attiva notifiche desktop</span>
+            </div>
+            <div class="ms-3">
+              <h4 class="fs-5">Ricevi notifiche di nuovi messaggi</h4>
+              <span class="text-decoration-underline"
+                >Attiva notifiche desktop</span
+              >
             </div>
           </div>
-          <div id="searchBar"></div>
-          <div id="chatsContainer" class="overflow-y-auto">
-            <div
-              v-for="(user, index) in contacts"
-              class="userChat"
-              @click="selectContact(index)"
-            >
-              <img :src="user.avatar" alt="ProfilePic" class="profilePicture" />
-              <h4>{{ user.name }}</h4>
-              <span class="lastOnline"></span>
-              <span class="lastMessage"></span>
+          <!-- SEARCH BAR -->
+          <div id="searchBar d-flex">
+            <div class="input-group px-3 py-2">
+              <button
+                class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3"
+                type="button"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+              <input
+                class="form-control rounded-pill"
+                type="text"
+                value="Ricerca contatti..."
+                v-model="searchContact"
+              />
+              <span class="input-group-append"> </span>
             </div>
+          </div>
+          <!-- CHATS -->
+          <div id="chatsContainer" class="overflow-y-scroll">
+            <ul>
+              <li
+                v-for="(user, index) in findContact"
+                class="userChat"
+                @click="selectContact(index)"
+              >
+                <div class="d-flex justify-content-between">
+                  <img
+                    :src="user.avatar"
+                    alt="ProfilePic"
+                    class="profilePicture"
+                  />
+
+                  <div>
+                    <h4>{{ user.name }}</h4>
+                    <span class="lastMessage"
+                      >{{user.messages[user.messages.length-1].message}}</span
+                    >
+                  </div>
+                  <span class="lastOnline timeStamp"
+                    >{{splitDate(user.messages[user.messages.length-1].date)}}</span
+                  >
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
+        <!-- RIGHT SIDE -->
         <div class="col-8 p-0" id="mainSection">
+          <!-- CURRENT CHAT BAR -->
           <div id="userBarChat" class="active">
-            <img
-              :src="contacts[selectedContact].avatar"
-              alt="My PP"
-              class="profilePicture"
-            />
-            <h4>{{contacts[selectedContact].name}}</h4>
+            <div>
+              <img
+                :src="contacts[selectedContact].avatar"
+                alt="User ProPic"
+                class="profilePicture d-inline-block"
+              />
+              <h4 class="d-inline-block">{{contacts[selectedContact].name}}</h4>
+            </div>
             <div class="icons">
               <i class="bi bi-search"></i>
               <i class="bi bi-paperclip"></i>
-              <i class="bi bi-three-dots-vertical"></i>
+              <i class="bi bi-three-dots-vertical mx-0"></i>
             </div>
           </div>
+          <!-- CURRENT CHAT TEXT -->
           <div id="activeChat" class="d-flex flex-column">
             <div
               v-for="item in contacts[selectedContact].messages"
@@ -93,17 +145,22 @@
               class="col-5"
             >
               <span>{{ item.message }}</span>
+              <span class="timeStamp">{{splitDate(item.date)}}</span>
             </div>
           </div>
-          <div id="typeBarChat" class="active d-flex p-3">
-            <div class="icons"><i class="bi bi-emoji-smile"></i></div>
+          <!-- WRITE TEXT MESSAGE -->
+          <div id="typeBarChat" class="active d-flex py-3">
+            <i class="bi bi-emoji-smile fs-3 mx-3"></i>
             <input
               type="text"
               name="newChatMessage"
+              v-model="newChatMessage"
               id="newChatMessage"
               class="form-control"
+              placeholder="Scrivi il tuo messaggio..."
+              @keyUp.enter="sendNewMessage()"
             />
-            <div class="icons"><i class="bi bi-mic-fill"></i></div>
+            <i class="bi bi-mic-fill fs-3 mx-3"></i>
           </div>
         </div>
       </div>

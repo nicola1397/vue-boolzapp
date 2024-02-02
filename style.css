@@ -13,6 +13,7 @@ body {
     #d7d7d1 20%,
     #d7d7d1 100%
   );
+  overflow: hidden;
 }
 .active {
   background-color: #e6e6e6;
@@ -27,20 +28,19 @@ body {
 #side,
 #mainSection {
   height: 100%;
-  border: 2px solid red;
 }
 
 #userBarChat,
 #profileBar,
 #typeBarChat {
   height: var(--bannersize);
-  border: 2px solid red;
 }
 
 #profileBar {
   display: flex;
   padding: 10px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .icons i {
@@ -50,7 +50,6 @@ body {
 
 #notificationBar {
   padding: 10px;
-  border: 2px solid red;
   background-color: #8cd7fa;
 }
 
@@ -67,7 +66,6 @@ body {
 
 #searchBar {
   height: 50px;
-  border: 2px solid red;
   background-color: #fafafa;
 }
 
@@ -80,7 +78,6 @@ body {
 /* CHAT LATERALI */
 
 .userChat {
-  border: 2px solid red;
   display: flex;
   padding: 10px;
 }
@@ -105,5 +102,18 @@ body {
   background-color: white;
   border-radius: 5px;
   margin-bottom: 10px;
+  padding: 10px;
+}
+
+.timeStamp {
+  color: darkslategray;
+  font-size: 0.7rem;
+  align-self: flex-end;
+}
+
+#userBarChat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
 }

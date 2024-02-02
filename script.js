@@ -168,23 +168,53 @@ const app = createApp({
       ],
 
       selectedContact: 0,
+      searchContact: "",
 
-      newChatMessage: {
-        date: "",
-        message: "",
-        status: "sent",
-      },
+      newChatMessage: "",
     };
   },
   computed: {
-    // getLastMessage() {
-    //   return this.messages[this.messages.length - 1].a;
-    // },
+    getLastMessage() {
+      return this.messages[this.messages.length - 1];
+    },
+    findContact() {
+      const searchName = this.searchContact.toLowerCase();
+      return this.contacts.filter((contact) => {
+        return contact.name.toLowerCase().includes(searchName);
+      });
+    },
   },
 
   methods: {
     selectContact(index) {
       this.selectedContact = index;
+    },
+    splitDate(date) {
+      const splittedDate = date.split(" ");
+      [messageDate, hour] = splittedDate;
+      return hour;
+    },
+
+    sendNewMessage() {
+      if (this.newChatMessage.trim() === "") {
+        return;
+      }
+      const messageSent = {
+        date: new Date().toLocaleString(),
+        message: this.newChatMessage,
+        status: "sent",
+      };
+      this.contacts[this.selectedContact].messages.push(messageSent);
+      this.newChatMessage = "";
+
+      setTimeout(() => {
+        const messageReply = {
+          date: new Date().toLocaleString(),
+          message: "Okay",
+          status: "received",
+        };
+        this.contacts[this.selectedContact].messages.push(messageReply);
+      }, 1000);
     },
   },
 });
